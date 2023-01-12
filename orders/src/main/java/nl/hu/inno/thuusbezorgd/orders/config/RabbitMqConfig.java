@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.restaurant.config;
+package nl.hu.inno.thuusbezorgd.orders.config;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
