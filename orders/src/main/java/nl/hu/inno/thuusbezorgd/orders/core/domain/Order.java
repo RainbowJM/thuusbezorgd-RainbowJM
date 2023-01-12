@@ -2,6 +2,7 @@ package nl.hu.inno.thuusbezorgd.orders.core.domain;
 
 import nl.hu.inno.thuusbezorgd.orders.core.domain.external.Delivery;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
