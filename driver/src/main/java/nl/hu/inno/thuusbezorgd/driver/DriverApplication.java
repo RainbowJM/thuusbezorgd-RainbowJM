@@ -1,4 +1,4 @@
-package nl.hu.inno;
+package nl.hu.inno.thuusbezorgd.driver;
 
 public class DriverApplication {
     public static void main(String[] args) {
