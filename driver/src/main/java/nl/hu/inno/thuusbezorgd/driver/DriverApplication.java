@@ -1,7 +1,11 @@
 package nl.hu.inno.thuusbezorgd.driver;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class DriverApplication {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(DriverApplication.class, args);
     }
 }
