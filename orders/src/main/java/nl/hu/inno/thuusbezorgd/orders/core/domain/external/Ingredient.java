@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.stock.core.domain;
+package nl.hu.inno.thuusbezorgd.orders.core.domain.external;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

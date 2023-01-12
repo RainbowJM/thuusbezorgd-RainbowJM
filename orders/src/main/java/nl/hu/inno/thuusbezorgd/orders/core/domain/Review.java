@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.driver.core.domain.external;
+package nl.hu.inno.thuusbezorgd.orders.core.domain;
 
 import javax.persistence.*;
 

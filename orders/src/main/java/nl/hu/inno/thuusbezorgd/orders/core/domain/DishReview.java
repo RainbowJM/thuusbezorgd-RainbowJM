@@ -1,2 +1,23 @@
-package nl.hu.inno.thuusbezorgd.orders.core.domain;public class DishReview {
+package nl.hu.inno.thuusbezorgd.orders.core.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class DishReview extends Review {
+
+    @ManyToOne
+    private Dish dish;
+
+    protected DishReview(){}
+
+    public DishReview(Dish dish, ReviewRating rating, User user) {
+        this.dish = dish;
+        super.rating = rating;
+        super.user = user;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
 }
