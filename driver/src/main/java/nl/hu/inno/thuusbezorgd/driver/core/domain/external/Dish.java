@@ -13,21 +13,21 @@ public class Dish {
     private Long id;
 
     private String name;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Ingredient> ingredients;
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    private List<Ingredient> ingredients;
 
     protected Dish() {
         //For Hibernate
     }
 
-    public Dish(String name, Ingredient... ingredients) {
-        if (ingredients.length == 0) {
-            throw new IllegalArgumentException("Cannot have 0 ingredients");
-        }
-
-        this.name = name;
-        this.ingredients = Arrays.asList(ingredients);
-    }
+//    public Dish(String name, Ingredient... ingredients) {
+//        if (ingredients.length == 0) {
+//            throw new IllegalArgumentException("Cannot have 0 ingredients");
+//        }
+//
+//        this.name = name;
+//        this.ingredients = Arrays.asList(ingredients);
+//    }
 
     public Long getId() {
         return id;
@@ -37,13 +37,13 @@ public class Dish {
         return name;
     }
 
-    public List<Ingredient> getIngredients() {
-        return Collections.unmodifiableList(ingredients);
-    }
+//    public List<Ingredient> getIngredients() {
+//        return Collections.unmodifiableList(ingredients);
+//    }
 
-    public boolean isVegetarian() {
-        return this.ingredients.stream().allMatch(Ingredient::isVegetarian);
-    }
+//    public boolean isVegetarian() {
+//        return this.ingredients.stream().allMatch(Ingredient::isVegetarian);
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -58,13 +58,13 @@ public class Dish {
         return Objects.hash(id);
     }
 
-    public int getAvailable() {
-        return this.getIngredients().stream().mapToInt(Ingredient::getNrInStock).min().orElse(0);
-    }
+//    public int getAvailable() {
+//        return this.getIngredients().stream().mapToInt(Ingredient::getNrInStock).min().orElse(0);
+//    }
 
-    public void prepare(){
-        for(Ingredient i: this.ingredients){
-            i.take(1);
-        }
-    }
+//    public void prepare(){
+//        for(Ingredient i: this.ingredients){
+//            i.take(1);
+//        }
+//    }
 }
