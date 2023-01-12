@@ -1,5 +1,8 @@
 package nl.hu.inno.thuusbezorgd.driver.core.domain;
 
+import nl.hu.inno.thuusbezorgd.driver.core.domain.external.Order;
+import nl.hu.inno.thuusbezorgd.driver.core.domain.external.OrderStatus;
+
 import javax.persistence.*;
 
 @Entity

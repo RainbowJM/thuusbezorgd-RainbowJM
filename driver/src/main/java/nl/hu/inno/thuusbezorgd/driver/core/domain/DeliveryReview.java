@@ -1,6 +1,8 @@
 package nl.hu.inno.thuusbezorgd.driver.core.domain;
 
 import nl.hu.inno.thuusbezorgd.driver.core.domain.external.Review;
+import nl.hu.inno.thuusbezorgd.driver.core.domain.external.ReviewRating;
+import nl.hu.inno.thuusbezorgd.driver.core.domain.external.User;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
