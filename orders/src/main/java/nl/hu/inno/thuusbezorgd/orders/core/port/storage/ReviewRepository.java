@@ -15,6 +15,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<DishReview> findDishReviews(@Param("dish") Dish dish);
 
 
-    @Query("select r from DeliveryReview r where r.delivery = :delivery")
-    List<DeliveryReview> findDeliveryReviews(@Param("delivery") Delivery delivery);
+//    @Query("select r from DeliveryReview r where r.delivery = :delivery")
+//    List<DeliveryReview> findDeliveryReviews(@Param("delivery") Delivery delivery);
 }
