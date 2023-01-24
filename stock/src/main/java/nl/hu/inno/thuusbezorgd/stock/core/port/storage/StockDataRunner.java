@@ -28,7 +28,7 @@ public class StockDataRunner implements CommandLineRunner {
                 new Ingredient("Lettuce", true),
                 new Ingredient("Tomato", true)
         )) {
-            i.deliver(10 * 1000);
+            i.deliver(10 * 10000);
             entities.persist(i);
         }
     }
