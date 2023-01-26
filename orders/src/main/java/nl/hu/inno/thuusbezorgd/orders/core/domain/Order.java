@@ -17,8 +17,9 @@ public class Order {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
+    private String userName;
 
     private LocalDateTime orderDate;
 
@@ -29,7 +30,8 @@ public class Order {
     @OneToOne
     private Delivery delivery;
 
-    private Address address;
+//    private Address address;
+    private String address;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -45,8 +47,8 @@ public class Order {
     protected Order() {
     }
 
-    public Order(User u, Address address) {
-        this.user = u;
+    public Order(String u, String address) {
+        this.userName = u;
         this.orderedDishes = new ArrayList<>();
         this.address = address;
         this.status = OrderStatus.Received;
@@ -56,8 +58,8 @@ public class Order {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUser() {
+        return userName;
     }
 
     public List<Dish> getOrderedDishes() {
@@ -78,7 +80,7 @@ public class Order {
         this.orderedDishes.add(new OrderedDish(this, dish));
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
@@ -98,6 +100,12 @@ public class Order {
         this.orderDate = orderMoment;
         for (Dish d : this.getOrderedDishes()) {
             d.prepare();
+        }
+    }
+
+    public void delivered(){
+        if (this.delivery.isCompleted()){
+            this.status = OrderStatus.Delivered;
         }
     }
 }

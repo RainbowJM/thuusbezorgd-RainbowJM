@@ -4,6 +4,8 @@ import nl.hu.inno.thuusbezorgd.orders.core.domain.Order;
 import nl.hu.inno.thuusbezorgd.orders.core.domain.OrderStatus;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedNativeQuery(name = "Delivery.findRandom", resultClass = Delivery.class,
@@ -15,8 +17,9 @@ public class Delivery {
 
     private boolean completed;
 
-    @ManyToOne
-    private Rider rider;
+    private String riderName;
+
+    private List<Delivery> deliveries = new ArrayList<>();
 
     @ManyToOne
     private Order order;
@@ -24,25 +27,33 @@ public class Delivery {
     protected Delivery() {
     }
 
-    public Delivery(Order order, Rider rider) {
+    public Delivery(Order order, String riderName) {
         this.order = order;
-        this.rider = rider;
+        this.riderName = riderName;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Rider getRider() {
-        return rider;
+    public String getRider() {
+        return riderName;
     }
 
     public Order getOrder() {
         return order;
     }
 
+    public String getRiderName() {
+        return riderName;
+    }
+
     public boolean isCompleted() {
         return completed;
+    }
+
+    public int getNrOfDeliveries() {
+        return deliveries.size();
     }
 
     public void markCompleted() {
