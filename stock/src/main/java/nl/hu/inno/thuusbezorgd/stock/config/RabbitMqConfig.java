@@ -1,13 +1,17 @@
 package nl.hu.inno.thuusbezorgd.stock.config;
 
-import org.springframework.amqp.core.TopicExchange;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.hu.inno.thuusbezorgd.stock.adapters.out.event.EventPublisher;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
 public class RabbitMqConfig {
@@ -19,11 +23,36 @@ public class RabbitMqConfig {
 
     @Value("${message.project-exchange}")
     private String exchange;
+
+    @Value("${message.queue.order-event}")
+    private String orderQueue;
+    @Value("${message.queue.order-binding}")
+    private String orderBinding;
+
+    @Value("${message.queue.driver-event}")
+    private String driverQueue;
+    @Value("${message.queue.driver-binding}")
+    private String driverBinding;
+
     @Bean
-    public MessageConverter messageConverter(){
-        return new Jackson2JsonMessageConverter();
+    public Queue orderQueue() {
+        return QueueBuilder.durable(orderQueue).build();
     }
 
+    @Bean
+    public Binding orderBinding(Queue orderQueue, TopicExchange exchange) {
+        return BindingBuilder.bind(orderQueue).to(exchange).with(orderBinding);
+    }
+
+    @Bean
+    public Queue driverQueue() {
+        return QueueBuilder.durable(driverQueue).build();
+    }
+
+    @Bean
+    public Binding driverBinding(Queue driverQueue, TopicExchange exchange){
+        return BindingBuilder.bind(driverQueue).to(exchange).with(driverBinding);
+    }
     @Bean
     public TopicExchange topicExchange(){
         return new TopicExchange(exchange);
@@ -33,4 +62,27 @@ public class RabbitMqConfig {
         return new CachingConnectionFactory(host, port);
     }
 
+    @Bean
+    public EventPublisher orderEventPublisher(RabbitTemplate template) {
+        return new EventPublisher(exchange, template);
+    }
+    // Setup RabbitMQ communication
+    @Bean
+    public RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter converter) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate();
+        rabbitTemplate.setConnectionFactory(connectionFactory());
+        rabbitTemplate.setMessageConverter(converter);
+        return rabbitTemplate;
+    }
+
+    // Configures a message converter so that it can be used by RabbitTemplate, format: JSON
+    @Bean
+    public Jackson2JsonMessageConverter converter(Jackson2ObjectMapperBuilder builder) {
+        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
+        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter(objectMapper);
+
+        // Prevent deserialization using the sender-specific
+        converter.setAlwaysConvertToInferredType(true);
+        return converter;
+    }
 }
