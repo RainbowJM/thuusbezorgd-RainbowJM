@@ -29,13 +29,13 @@ public class Dish {
 //        this.ingredients = Arrays.asList(ingredients);
 //    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
 
 //    public List<Ingredient> getIngredients() {
 //        return Collections.unmodifiableList(ingredients);
@@ -45,18 +45,18 @@ public class Dish {
 //        return this.ingredients.stream().allMatch(Ingredient::isVegetarian);
 //    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dish dish = (Dish) o;
-        return Objects.equals(id, dish.id) && Objects.equals(name, dish.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Dish dish = (Dish) o;
+//        return Objects.equals(id, dish.id) && Objects.equals(name, dish.name);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
 
 //    public int getAvailable() {
 //        return this.getIngredients().stream().mapToInt(Ingredient::getNrInStock).min().orElse(0);
