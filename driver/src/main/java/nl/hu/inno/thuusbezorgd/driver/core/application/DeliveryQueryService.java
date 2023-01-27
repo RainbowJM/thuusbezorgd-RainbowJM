@@ -22,7 +22,7 @@ public class DeliveryQueryService {
 
     public List<Delivery> get(ListDeliveryQuery listQuery) {
         if (listQuery.riderName() == null){
-            this.deliveryRepository.findAll();
+            return this.deliveryRepository.findAll();
         }
         return this.deliveryRepository.findByRiderName(listQuery.riderName());
     }
