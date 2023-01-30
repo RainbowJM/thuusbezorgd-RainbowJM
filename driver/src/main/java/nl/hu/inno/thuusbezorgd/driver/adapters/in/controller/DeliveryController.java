@@ -1,10 +1,12 @@
 package nl.hu.inno.thuusbezorgd.driver.adapters.in.controller;
 
+import lombok.extern.log4j.Log4j2;
 import nl.hu.inno.thuusbezorgd.driver.adapters.in.controller.dto.CreateDeliveryRequest;
 import nl.hu.inno.thuusbezorgd.driver.core.application.DeliveryCommandService;
 import nl.hu.inno.thuusbezorgd.driver.core.application.DeliveryQueryService;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.CreateDeliveryCommand;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.DeleteDeliveryCommand;
+import nl.hu.inno.thuusbezorgd.driver.core.application.command.UpdateDeliveryStatus;
 import nl.hu.inno.thuusbezorgd.driver.core.application.query.DeliveryQuery;
 import nl.hu.inno.thuusbezorgd.driver.core.application.query.ListDeliveryQuery;
 import nl.hu.inno.thuusbezorgd.driver.core.domain.Delivery;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/deliveries")
+@Log4j2
 public class DeliveryController {
 
     private final DeliveryQueryService queryService;
@@ -44,6 +47,12 @@ public class DeliveryController {
     public Delivery create(@Valid @RequestBody CreateDeliveryRequest createDeliveryRequest) {
         return this.commandService.create(new CreateDeliveryCommand(Long.valueOf(createDeliveryRequest.getOrderId()),
                 createDeliveryRequest.getRiderName()));
+    }
+
+    @PutMapping("/{deliveryId}/status/{orderStatus}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Delivery update(@PathVariable Long deliveryId, @PathVariable String orderStatus) {
+        return this.commandService.update(new UpdateDeliveryStatus(deliveryId, orderStatus));
     }
 
     @DeleteMapping("/{deliveryId}")

@@ -1,15 +1,13 @@
 package nl.hu.inno.thuusbezorgd.driver.core.application;
 
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.ChangeDeliveryCommand;
-import nl.hu.inno.thuusbezorgd.driver.core.event.DeliveryChangedEvent;
-import nl.hu.inno.thuusbezorgd.driver.core.event.DeliveryCreatedEvent;
+import nl.hu.inno.thuusbezorgd.driver.core.application.command.UpdateDeliveryStatus;
+import nl.hu.inno.thuusbezorgd.driver.core.event.*;
 import nl.hu.inno.thuusbezorgd.driver.adapters.out.event.EventPublisher;
 import nl.hu.inno.thuusbezorgd.driver.adapters.in.message.OrderEventListener;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.CreateDeliveryCommand;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.DeleteDeliveryCommand;
 import nl.hu.inno.thuusbezorgd.driver.core.domain.Delivery;
-import nl.hu.inno.thuusbezorgd.driver.core.event.DeliveryDeletedEvent;
-import nl.hu.inno.thuusbezorgd.driver.core.event.DeliveryEvent;
 import nl.hu.inno.thuusbezorgd.driver.core.exception.DeliveryNotFound;
 import nl.hu.inno.thuusbezorgd.driver.core.exception.OrderNotFound;
 import nl.hu.inno.thuusbezorgd.driver.core.port.storage.DeliveryRepository;
@@ -55,6 +53,20 @@ public class DeliveryCommandService {
         this.eventPublisher.publish(new DeliveryDeletedEvent(delivery.get().getId()));
 
         this.deliveryRepository.delete(delivery.get());
+    }
+
+    public Delivery update(UpdateDeliveryStatus updateDeliveryStatus) {
+        Optional<Delivery> deliveryOpt = this.deliveryRepository.findById(updateDeliveryStatus.deliveryId());
+
+        if (deliveryOpt.isEmpty()) {
+            throw new DeliveryNotFound(updateDeliveryStatus.deliveryId());
+        }
+
+        Delivery delivery = deliveryOpt.get();
+        delivery.markCompleted();
+
+        this.eventPublisher.publish(new DeliveryUpdatedEvent(delivery.getId()));
+        return this.deliveryRepository.save(delivery);
     }
 
 //    public Delivery change(ChangeDeliveryCommand changeDeliveryCommand) {
