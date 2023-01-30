@@ -13,5 +13,6 @@ public class EventPublisher implements DeliveryEventPublisher {
     @Override
     public void publish(DeliveryEvent event) {
         this.rabbitTemplate.convertAndSend(deliveryEventExchange, event.getEventKey(), event);
+        System.out.println(event.getEventKey());
     }
 }
