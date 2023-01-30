@@ -1,15 +1,12 @@
 package nl.hu.inno.thuusbezorgd.driver.core.application;
 
-import nl.hu.inno.thuusbezorgd.driver.core.application.command.ChangeDeliveryCommand;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.UpdateDeliveryStatus;
 import nl.hu.inno.thuusbezorgd.driver.core.event.*;
 import nl.hu.inno.thuusbezorgd.driver.adapters.out.event.EventPublisher;
-import nl.hu.inno.thuusbezorgd.driver.adapters.in.message.OrderEventListener;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.CreateDeliveryCommand;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.DeleteDeliveryCommand;
 import nl.hu.inno.thuusbezorgd.driver.core.domain.Delivery;
 import nl.hu.inno.thuusbezorgd.driver.core.exception.DeliveryNotFound;
-import nl.hu.inno.thuusbezorgd.driver.core.exception.OrderNotFound;
 import nl.hu.inno.thuusbezorgd.driver.core.port.storage.DeliveryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
