@@ -4,7 +4,6 @@ import lombok.Getter;
 
 import java.time.Instant;
 import java.util.Random;
-import java.util.UUID;
 
 public abstract class DeliveryEvent {
     @Getter

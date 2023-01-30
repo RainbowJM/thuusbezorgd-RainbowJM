@@ -1,12 +1,9 @@
-package nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event;
+package nl.hu.inno.thuusbezorgd.driver.core.event;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import nl.hu.inno.thuusbezorgd.driver.core.event.DeliveryEvent;
 
 @AllArgsConstructor
-@JsonTypeName(DeliveryCreatedEvent.KEY)
 public class DeliveryCreatedEvent extends DeliveryEvent {
     public static final String KEY = "delivery.event.created";
 
