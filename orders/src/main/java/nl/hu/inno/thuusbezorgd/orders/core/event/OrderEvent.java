@@ -3,11 +3,11 @@ package nl.hu.inno.thuusbezorgd.orders.core.event;
 import lombok.Getter;
 
 import java.time.Instant;
-import java.util.UUID;
+import java.util.Random;
 
 public abstract class OrderEvent {
     @Getter
-    private final UUID id = UUID.randomUUID();
+    private final Long id = new Random().nextLong();
     @Getter
     private final Instant timestamp = Instant.now();
 
