@@ -50,7 +50,7 @@ public class StockCommandService {
     }
 
     public Ingredient increase(IncreaseIngredientCommand increaseIngredientCommand) {
-        Optional<Ingredient> ingredientOpt = this.ingredientRepository.findIngredientByName(increaseIngredientCommand.ingredientName());
+        Optional<Ingredient> ingredientOpt = this.ingredientRepository.getIngredientByName(increaseIngredientCommand.ingredientName());
 
         if (ingredientOpt.isEmpty()) {
             throw new IngredientNotFound(increaseIngredientCommand.ingredientName());
