@@ -43,7 +43,9 @@ public class StockController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Ingredient add(@Valid @RequestBody AddIngredientRequest addIngredientRequest) {
-        return this.commandService.increase(new IncreaseIngredientCommand(addIngredientRequest.getIngredientName(),
-                addIngredientRequest.getVegetarian()));
+        return this.commandService.add(new AddIngredientCommand(addIngredientRequest.getIngredientName(),
+                addIngredientRequest.isVegetarian()));
     }
+
+
 }

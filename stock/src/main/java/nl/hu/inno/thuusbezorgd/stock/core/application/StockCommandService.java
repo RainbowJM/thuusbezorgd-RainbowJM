@@ -28,6 +28,7 @@ public class StockCommandService {
 
     public Ingredient add(AddIngredientCommand addIngredientCommand) {
         Ingredient ingredient = new Ingredient(addIngredientCommand.name(), addIngredientCommand.vegetarian());
+        ingredient.deliver(10 * 10000);
 
         this.eventPublisher.publish(new IngredientAddedEvent(ingredient.getId(),
                 ingredient.getName(),
@@ -36,7 +37,7 @@ public class StockCommandService {
         return this.ingredientRepository.save(ingredient);
     }
 
-    public void use(UseIngredientCommand useIngredientCommand) {
+    public void decrease(UseIngredientCommand useIngredientCommand) {
         Optional<Ingredient> ingredientOpt = this.ingredientRepository.findById(useIngredientCommand.ingredientId());
 
         if (ingredientOpt.isEmpty()) {
@@ -64,4 +65,5 @@ public class StockCommandService {
 
         return this.ingredientRepository.save(ingredient);
     }
+
 }

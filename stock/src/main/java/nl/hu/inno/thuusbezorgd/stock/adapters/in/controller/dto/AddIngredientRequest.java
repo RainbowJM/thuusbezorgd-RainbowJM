@@ -8,8 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class AddIngredientRequest {
 
     @NotBlank
-    String IngredientName;
+    String ingredientName;
 
-    @NotBlank
-    String vegetarian;
+    boolean vegetarian;
 }
