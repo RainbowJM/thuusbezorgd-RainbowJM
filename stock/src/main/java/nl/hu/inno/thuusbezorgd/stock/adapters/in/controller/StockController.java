@@ -48,6 +48,11 @@ public class StockController {
                 addIngredientRequest.isVegetarian()));
     }
 
+    @PutMapping("/{ingredientName}/amount/{nr}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Ingredient increase(@PathVariable String ingredientName, @PathVariable int nr){
+        return this.commandService.increase(new IncreaseIngredientCommand(ingredientName,nr));
+    }
     @DeleteMapping("/{ingredientName}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String ingredientName) {

@@ -60,6 +60,7 @@ public class StockCommandService {
         }
 
         Ingredient ingredient = ingredientOpt.get();
+        ingredient.deliver(increaseIngredientCommand.amount());
 
         this.eventPublisher.publish(new IngredientIncreasedEvent(ingredient.getId(),
                 ingredient.getName(),
