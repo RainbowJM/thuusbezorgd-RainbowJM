@@ -20,18 +20,15 @@ public class StockQueryService {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public List<Ingredient> get(ListIngredientQuery listQuery) {
-        if (listQuery.ingredientName() == null) {
+    public List<Ingredient> get() {
             return this.ingredientRepository.findAll();
-        }
-        return this.ingredientRepository.findIngredientByName(listQuery.ingredientName());
     }
 
     public Ingredient get(IngredientQuery query) {
-        Optional<Ingredient> ingredient = this.ingredientRepository.findById(query.ingredientId());
+        Optional<Ingredient> ingredient = this.ingredientRepository.getIngredientByName(query.ingredientName());
 
         if (ingredient.isEmpty()) {
-            throw new IngredientNotFound(query.ingredientId());
+            throw new IngredientNotFound(query.ingredientName());
         }
 
         return ingredient.get();
