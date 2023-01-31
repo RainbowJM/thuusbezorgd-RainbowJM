@@ -41,15 +41,17 @@ public class DeliveryCommandService {
     }
 
     public void delete(DeleteDeliveryCommand deleteDeliveryCommand) {
-        Optional<Delivery> delivery = this.deliveryRepository.findById(deleteDeliveryCommand.deliveryId());
+        Optional<Delivery> deliveryOpt = this.deliveryRepository.findById(deleteDeliveryCommand.deliveryId());
 
-        if (delivery.isEmpty()) {
+        if (deliveryOpt.isEmpty()) {
             throw new DeliveryNotFound(deleteDeliveryCommand.deliveryId());
         }
 
-        this.eventPublisher.publish(new DeliveryDeletedEvent(delivery.get().getId()));
+        Delivery delivery = deliveryOpt.get();
 
-        this.deliveryRepository.delete(delivery.get());
+        this.eventPublisher.publish(new DeliveryDeletedEvent(delivery.getId()));
+
+        this.deliveryRepository.delete(delivery);
     }
 
     public Delivery update(UpdateDeliveryStatus updateDeliveryStatus) {
