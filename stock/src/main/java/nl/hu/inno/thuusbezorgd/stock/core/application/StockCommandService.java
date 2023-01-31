@@ -2,10 +2,12 @@ package nl.hu.inno.thuusbezorgd.stock.core.application;
 
 import nl.hu.inno.thuusbezorgd.stock.adapters.out.event.EventPublisher;
 import nl.hu.inno.thuusbezorgd.stock.core.application.command.AddIngredientCommand;
+import nl.hu.inno.thuusbezorgd.stock.core.application.command.DeleteIngredientCommand;
 import nl.hu.inno.thuusbezorgd.stock.core.application.command.IncreaseIngredientCommand;
 import nl.hu.inno.thuusbezorgd.stock.core.application.command.UseIngredientCommand;
 import nl.hu.inno.thuusbezorgd.stock.core.domain.Ingredient;
 import nl.hu.inno.thuusbezorgd.stock.core.event.IngredientAddedEvent;
+import nl.hu.inno.thuusbezorgd.stock.core.event.IngredientDeletedEvent;
 import nl.hu.inno.thuusbezorgd.stock.core.event.IngredientIncreasedEvent;
 import nl.hu.inno.thuusbezorgd.stock.core.exception.IngredientNotFound;
 import nl.hu.inno.thuusbezorgd.stock.core.port.storage.IngredientRepository;
@@ -66,4 +68,17 @@ public class StockCommandService {
         return this.ingredientRepository.save(ingredient);
     }
 
+    public void delete(DeleteIngredientCommand deleteIngredientCommand) {
+        Optional<Ingredient> ingredientOpt = this.ingredientRepository.getIngredientByName(deleteIngredientCommand.ingredientName());
+
+        if (ingredientOpt.isEmpty()) {
+            throw new IngredientNotFound(deleteIngredientCommand.ingredientName());
+        }
+
+        Ingredient ingredient = ingredientOpt.get();
+
+        this.eventPublisher.publish(new IngredientDeletedEvent(ingredient.getId()));
+
+        this.ingredientRepository.delete(ingredient);
+    }
 }

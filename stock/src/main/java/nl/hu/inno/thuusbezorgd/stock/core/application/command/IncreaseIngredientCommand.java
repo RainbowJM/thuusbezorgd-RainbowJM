@@ -1,4 +1,4 @@
 package nl.hu.inno.thuusbezorgd.stock.core.application.command;
 
-public record IncreaseIngredientCommand(String ingredientName, String vegetarian) {
+public record IncreaseIngredientCommand(String ingredientName, boolean vegetarian) {
 }

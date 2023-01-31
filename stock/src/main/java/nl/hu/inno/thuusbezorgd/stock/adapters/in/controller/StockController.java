@@ -5,6 +5,7 @@ import nl.hu.inno.thuusbezorgd.stock.adapters.in.controller.dto.AddIngredientReq
 import nl.hu.inno.thuusbezorgd.stock.core.application.StockCommandService;
 import nl.hu.inno.thuusbezorgd.stock.core.application.StockQueryService;
 import nl.hu.inno.thuusbezorgd.stock.core.application.command.AddIngredientCommand;
+import nl.hu.inno.thuusbezorgd.stock.core.application.command.DeleteIngredientCommand;
 import nl.hu.inno.thuusbezorgd.stock.core.application.command.IncreaseIngredientCommand;
 import nl.hu.inno.thuusbezorgd.stock.core.application.query.IngredientQuery;
 import nl.hu.inno.thuusbezorgd.stock.core.domain.Ingredient;
@@ -47,5 +48,10 @@ public class StockController {
                 addIngredientRequest.isVegetarian()));
     }
 
+    @DeleteMapping("/{ingredientName}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable String ingredientName) {
+        this.commandService.delete(new DeleteIngredientCommand(ingredientName));
+    }
 
 }
