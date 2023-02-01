@@ -47,7 +47,7 @@ public class StockCommandService {
         }
 
         Ingredient ingredient = ingredientOpt.get();
-        // TODO: logic to reduce
+        ingredient.take(1);
 
         this.ingredientRepository.save(ingredient);
     }

@@ -27,17 +27,13 @@ public class DeliveryCommandService {
 
     public Delivery create(CreateDeliveryCommand createDeliveryCommand) {
 
-//        if (OrderEventListener.orderExists(createDeliveryCommand.orderId())){
-        Delivery delivery = new Delivery(createDeliveryCommand.orderId(),
-                createDeliveryCommand.riderName());
+        Delivery delivery = new Delivery(createDeliveryCommand.orderId());
 
         this.eventPublisher.publish(new DeliveryCreatedEvent(delivery.getOrderId(),
                 delivery.getRiderName(),
                 delivery.getId(),
                 delivery.getNrOfDeliveries()));
         return this.deliveryRepository.save(delivery);
-//        }
-//        else throw new OrderNotFound(createDeliveryCommand.orderId());
     }
 
     public void delete(DeleteDeliveryCommand deleteDeliveryCommand) {

@@ -3,6 +3,7 @@ package nl.hu.inno.thuusbezorgd.orders.core.application;
 import nl.hu.inno.thuusbezorgd.orders.adapters.out.event.EventPublisher;
 import nl.hu.inno.thuusbezorgd.orders.core.application.command.CreateOrderCommand;
 import nl.hu.inno.thuusbezorgd.orders.core.application.command.DeleteOrderCommand;
+import nl.hu.inno.thuusbezorgd.orders.core.application.command.UpdateOrderCommand;
 import nl.hu.inno.thuusbezorgd.orders.core.domain.Dish;
 import nl.hu.inno.thuusbezorgd.orders.core.domain.Order;
 import nl.hu.inno.thuusbezorgd.orders.core.domain.OrderStatus;
@@ -58,5 +59,18 @@ public class OrderCommandService {
         this.eventPublisher.publish(new OrderRemovedEvent(order.getId()));
 
         this.orderRepository.delete(order);
+    }
+
+    public void update(UpdateOrderCommand updateOrderCommand) {
+        Optional<Order> orderOpt = this.orderRepository.findById(updateOrderCommand.orderId());
+
+        if (orderOpt.isEmpty()) {
+            throw new OrderNotFound(updateOrderCommand.orderId());
+        }
+
+        Order order = orderOpt.get();
+        order.setStatus(OrderStatus.ReadyForDelivery);
+
+        this.orderRepository.save(order);
     }
 }

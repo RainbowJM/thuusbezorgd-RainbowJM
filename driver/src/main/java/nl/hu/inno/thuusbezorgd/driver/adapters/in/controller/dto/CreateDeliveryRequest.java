@@ -7,9 +7,6 @@ import javax.validation.constraints.NotBlank;
 @Getter
 public class CreateDeliveryRequest {
 
-    @NotBlank(message = "riderName can't be empty")
-    String riderName;
-
     @NotBlank
     String orderId;
 

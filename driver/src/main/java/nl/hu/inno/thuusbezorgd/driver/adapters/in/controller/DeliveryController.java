@@ -45,8 +45,7 @@ public class DeliveryController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Delivery create(@Valid @RequestBody CreateDeliveryRequest createDeliveryRequest) {
-        return this.commandService.create(new CreateDeliveryCommand(Long.valueOf(createDeliveryRequest.getOrderId()),
-                createDeliveryRequest.getRiderName()));
+        return this.commandService.create(new CreateDeliveryCommand(Long.valueOf(createDeliveryRequest.getOrderId())));
     }
 
     @PutMapping("/{deliveryId}/status/{orderStatus}")

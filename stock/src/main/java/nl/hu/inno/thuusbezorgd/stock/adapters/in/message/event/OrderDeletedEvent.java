@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event;
+package nl.hu.inno.thuusbezorgd.stock.adapters.in.message.event;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AllArgsConstructor;
@@ -16,4 +16,10 @@ public class OrderDeletedEvent extends OrderEvent {
 
     @Getter
     private final Long deliveryId;
+
+    @Getter
+    private final String ingredientName;
+
+    @Getter
+    private final int ingredientAmount;
 }

@@ -27,9 +27,9 @@ public class Delivery {
     protected Delivery() {
     }
 
-    public Delivery(Long orderId, String riderName) {
+    public Delivery(Long orderId) {
         this.orderId = orderId;
-        this.riderName = riderName;
+        this.riderName = "Joe";
     }
 
     public Long getId() {
