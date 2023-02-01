@@ -7,6 +7,7 @@ import nl.hu.inno.thuusbezorgd.orders.core.port.storage.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,9 @@ public class OrderQueryService {
         this.orderRepository = orderRepository;
     }
 
+    public List<Order> get() {
+        return this.orderRepository.findAll();
+    }
     public Order get(OrderQuery query){
         Optional<Order> order = this.orderRepository.findById(query.orderId());
 

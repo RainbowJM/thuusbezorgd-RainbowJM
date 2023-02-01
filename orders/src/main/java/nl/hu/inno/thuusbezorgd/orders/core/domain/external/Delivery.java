@@ -19,16 +19,13 @@ public class Delivery {
 
     private String riderName;
 
-    private List<Delivery> deliveries = new ArrayList<>();
-
-    @ManyToOne
-    private Order order;
+    private Long orderId;
 
     protected Delivery() {
     }
 
-    public Delivery(Order order, String riderName) {
-        this.order = order;
+    public Delivery(Long order, String riderName) {
+        this.orderId = order;
         this.riderName = riderName;
     }
 
@@ -40,8 +37,8 @@ public class Delivery {
         return riderName;
     }
 
-    public Order getOrder() {
-        return order;
+    public Long getOrder() {
+        return orderId;
     }
 
     public String getRiderName() {
@@ -52,13 +49,6 @@ public class Delivery {
         return completed;
     }
 
-    public int getNrOfDeliveries() {
-        return deliveries.size();
-    }
 
-    public void markCompleted() {
-        this.completed = true;
-        this.order.setStatus(OrderStatus.Delivered);
-    }
 }
 

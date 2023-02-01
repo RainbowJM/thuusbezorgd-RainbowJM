@@ -2,6 +2,7 @@ package nl.hu.inno.thuusbezorgd.orders.core.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import nl.hu.inno.thuusbezorgd.orders.core.domain.OrderStatus;
 
 @AllArgsConstructor
 public class OrderCreatedEvent extends OrderEvent {
@@ -13,13 +14,13 @@ public class OrderCreatedEvent extends OrderEvent {
     }
 
     @Getter
-    private final String orderId;
+    private final Long orderId;
 
     @Getter
-    private final String driverId;
+    private final Long driverId;
 
     @Getter
-    private final String status;
+    private final OrderStatus status;
 
     @Getter
     private final String deliveryAddress;

@@ -1,8 +1,8 @@
 package nl.hu.inno.thuusbezorgd.orders.adapters.in.controller.dto;
 
 import lombok.Getter;
-import nl.hu.inno.thuusbezorgd.orders.core.domain.Address;
-import nl.hu.inno.thuusbezorgd.orders.core.domain.OrderedDish;
+import nl.hu.inno.thuusbezorgd.orders.core.domain.Dish;
+import nl.hu.inno.thuusbezorgd.orders.core.domain.OrderStatus;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -16,5 +16,14 @@ public class CreateOrderRequest {
     @NotBlank(message = "Address can't be empty")
     String address;
 
-    List<OrderedDish> orderedDishes;
+    List<Dish> orderedDishes;
+
+    OrderStatus status;
+
+    public CreateOrderRequest(String userName, String address, List<Dish> orderedDishes) {
+        this.userName = userName;
+        this.address = address;
+        this.orderedDishes = orderedDishes;
+        this.status = OrderStatus.Received;
+    }
 }

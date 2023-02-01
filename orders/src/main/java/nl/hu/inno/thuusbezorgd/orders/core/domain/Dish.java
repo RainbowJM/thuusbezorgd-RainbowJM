@@ -13,8 +13,8 @@ public class Dish {
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Ingredient> ingredients;
 
@@ -60,13 +60,4 @@ public class Dish {
         return Objects.hash(id);
     }
 
-    public int getAvailable() {
-        return this.getIngredients().stream().mapToInt(Ingredient::getNrInStock).min().orElse(0);
-    }
-
-    public void prepare(){
-        for(Ingredient i: this.ingredients){
-            i.take(1);
-        }
-    }
 }
