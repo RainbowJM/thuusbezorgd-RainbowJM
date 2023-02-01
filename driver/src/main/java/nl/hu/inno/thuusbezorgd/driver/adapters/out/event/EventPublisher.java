@@ -7,12 +7,13 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @AllArgsConstructor
 public class EventPublisher implements DeliveryEventPublisher {
+
     private final String deliveryEventExchange;
+
     private final RabbitTemplate rabbitTemplate;
 
     @Override
     public void publish(DeliveryEvent event) {
         this.rabbitTemplate.convertAndSend(deliveryEventExchange, event.getEventKey(), event);
-        System.out.println(event.getEventKey());
     }
 }

@@ -22,8 +22,6 @@ public class Delivery {
     @ElementCollection
     private List<Delivery> deliveries = new ArrayList<>();
 
-//    @ManyToOne
-//    private Order order;
     private Long orderId;
 
     protected Delivery() {

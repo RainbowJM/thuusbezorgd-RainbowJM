@@ -1,9 +1,7 @@
 package nl.hu.inno.thuusbezorgd.driver.core.port.storage;
 
-import nl.hu.inno.thuusbezorgd.driver.core.domain.Delivery;
 import nl.hu.inno.thuusbezorgd.driver.core.domain.external.Order;
 import nl.hu.inno.thuusbezorgd.driver.core.domain.external.OrderStatus;
-import nl.hu.inno.thuusbezorgd.driver.core.domain.external.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

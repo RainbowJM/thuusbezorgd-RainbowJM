@@ -13,8 +13,6 @@ public class Dish {
     private Long id;
 
     private String name;
-//    @ManyToMany(cascade = CascadeType.PERSIST)
-//    private List<Ingredient> ingredients;
 
     protected Dish() {
         //For Hibernate
