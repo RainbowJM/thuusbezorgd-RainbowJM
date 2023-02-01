@@ -13,5 +13,5 @@ public class OrderRemovedEvent extends OrderEvent {
     }
 
     @Getter
-    private final String orderId;
+    private final Long orderId;
 }

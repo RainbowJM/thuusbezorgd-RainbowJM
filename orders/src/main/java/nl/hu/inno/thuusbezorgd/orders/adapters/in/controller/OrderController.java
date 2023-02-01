@@ -4,6 +4,7 @@ import nl.hu.inno.thuusbezorgd.orders.adapters.in.controller.dto.CreateOrderRequ
 import nl.hu.inno.thuusbezorgd.orders.core.application.OrderCommandService;
 import nl.hu.inno.thuusbezorgd.orders.core.application.OrderQueryService;
 import nl.hu.inno.thuusbezorgd.orders.core.application.command.CreateOrderCommand;
+import nl.hu.inno.thuusbezorgd.orders.core.application.command.DeleteOrderCommand;
 import nl.hu.inno.thuusbezorgd.orders.core.application.query.OrderQuery;
 import nl.hu.inno.thuusbezorgd.orders.core.domain.*;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,6 @@ public class OrderController {
     @DeleteMapping("/{orderId}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable int orderId) {
-        this.commandService.delete(new DeleteOrderCommand(orderId));
+        this.commandService.delete(new DeleteOrderCommand(Long.valueOf(orderId)));
     }
 }
