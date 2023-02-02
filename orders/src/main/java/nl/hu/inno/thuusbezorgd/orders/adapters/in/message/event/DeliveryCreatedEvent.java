@@ -8,8 +8,8 @@ import nl.hu.inno.thuusbezorgd.orders.core.domain.Dish;
 import java.util.List;
 
 @AllArgsConstructor
-@JsonTypeName(DriverCreatedEvent.KEY)
-public class DriverCreatedEvent extends DriverEvent{
+@JsonTypeName(DeliveryCreatedEvent.KEY)
+public class DeliveryCreatedEvent extends DeliveryEvent {
 
     public static final String KEY = "driver.event.created";
 

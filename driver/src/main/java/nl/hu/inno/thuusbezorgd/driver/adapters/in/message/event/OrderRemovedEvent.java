@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-@JsonTypeName(OrderDeletedEvent.KEY)
-public class OrderDeletedEvent extends OrderEvent {
+@JsonTypeName(OrderRemovedEvent.KEY)
+public class OrderRemovedEvent extends OrderEvent {
     public static final String KEY = "order.event.deleted";
 
     @Override

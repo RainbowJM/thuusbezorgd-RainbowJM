@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event;
+package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -12,13 +12,13 @@ import java.util.Random;
         property = "eventKey"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = OrderCreatedEvent.class),
-//        @JsonSubTypes.Type(value = OrderChangedEvent.class),
-        @JsonSubTypes.Type(value = OrderRemovedEvent.class)
+        @JsonSubTypes.Type(value = DeliveryCreatedEvent.class),
+        @JsonSubTypes.Type(value = DeliveryUpdatedEvent.class),
 })
-public abstract class OrderEvent {
+public abstract class DeliveryEvent {
     @Getter
-    private final Long id = new Random().nextLong();
+    private  final Long id = new Random().nextLong();
+
     @Getter
     private final Instant timestamp = Instant.now();
 

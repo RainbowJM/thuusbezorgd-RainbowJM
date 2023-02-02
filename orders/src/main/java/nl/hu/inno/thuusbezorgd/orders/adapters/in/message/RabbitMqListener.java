@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RabbitMqListener {
-    private static Logger logger = LogManager.getLogger(RabbitMqListener.class.toString());
+    private static final Logger logger = LogManager.getLogger(RabbitMqListener.class.toString());
 
     private final OrderCommandService orderCommandService;
 
@@ -22,43 +22,43 @@ public class RabbitMqListener {
     @RabbitListener(queues = {"${message.queue.stock-event}"})
     private void listen(StockEvent event){
         switch (event.getEventKey()) {
-            case StockIncreasedEvent.KEY:
-                this.increase((StockIncreasedEvent) event);
+            case IngredientIncreasedEvent.KEY:
+                this.increase((IngredientIncreasedEvent) event);
                 break;
-            case StockDecreasedEvent.KEY:
-                this.decrease((StockDecreasedEvent) event);
+            case IngredientDecreasedEvent.KEY:
+                this.decrease((IngredientDecreasedEvent) event);
                 break;
         }
     }
 
-    private void increase(StockIncreasedEvent event){
+    private void increase(IngredientIncreasedEvent event){
         logger.info("stock has been increased");
         // for in this future feature this could be handy
     }
 
-    private void decrease(StockDecreasedEvent event){
+    private void decrease(IngredientDecreasedEvent event){
         logger.info("Stock has decreased due to orders that has been placed");
         // for in this future feature this could be handy
     }
     @RabbitListener(queues = {"${message.queue.driver-event}"})
-    private void listen(DriverEvent event) {
+    private void listen(DeliveryEvent event) {
         switch (event.getEventKey()) {
-            case DriverCreatedEvent.KEY:
-                this.create((DriverCreatedEvent) event);
+            case DeliveryCreatedEvent.KEY:
+                this.create((DeliveryCreatedEvent) event);
                 break;
-            case DriverUpdatedEvent.KEY:
-                this.update((DriverUpdatedEvent) event);
+            case DeliveryUpdatedEvent.KEY:
+                this.update((DeliveryUpdatedEvent) event);
                 break;
         }
     }
 
-    private void create(DriverCreatedEvent event){
+    private void create(DeliveryCreatedEvent event){
         this.orderCommandService.create(new CreateOrderCommand(event.getUsername(),
                 event.getOrderedDishes(),
                 event.getAddress()));
     }
 
-    private void update(DriverUpdatedEvent event){
+    private void update(DeliveryUpdatedEvent event){
         this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
     }
 }

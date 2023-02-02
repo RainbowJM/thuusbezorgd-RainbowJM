@@ -1,7 +1,7 @@
 package nl.hu.inno.thuusbezorgd.driver.adapters.in.message;
 
 import nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event.OrderCreatedEvent;
-import nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event.OrderDeletedEvent;
+import nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event.OrderRemovedEvent;
 import nl.hu.inno.thuusbezorgd.driver.adapters.in.message.event.OrderEvent;
 import nl.hu.inno.thuusbezorgd.driver.core.application.DeliveryCommandService;
 import nl.hu.inno.thuusbezorgd.driver.core.application.command.CreateDeliveryCommand;
@@ -25,8 +25,8 @@ public class RabbitMqEventListener {
             case OrderCreatedEvent.KEY:
                 this.create((OrderCreatedEvent) event);
                 break;
-            case OrderDeletedEvent.KEY:
-                this.delete((OrderDeletedEvent) event);
+            case OrderRemovedEvent.KEY:
+                this.delete((OrderRemovedEvent) event);
                 break;
         }
     }
@@ -35,7 +35,7 @@ public class RabbitMqEventListener {
         this.deliveryCommandService.create(new CreateDeliveryCommand(event.getId()));
     }
 
-    private void delete(OrderDeletedEvent event) {
+    private void delete(OrderRemovedEvent event) {
         this.deliveryCommandService.delete(new DeleteDeliveryCommand(event.getDeliveryId()));
     }
 }
