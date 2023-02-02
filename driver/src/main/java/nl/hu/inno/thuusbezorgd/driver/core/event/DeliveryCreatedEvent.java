@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public class DeliveryCreatedEvent extends DeliveryEvent {
-    public static final String KEY = "delivery.event.created";
+    public static final String KEY = "driver.event.created";
 
     @Override
     public String getEventKey() {

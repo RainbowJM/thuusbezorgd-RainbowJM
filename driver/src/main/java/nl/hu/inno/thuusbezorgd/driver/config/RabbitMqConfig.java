@@ -50,7 +50,7 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public Binding driverBinding(Queue orderQueue, TopicExchange exchange){
+    public Binding orderBinding(Queue orderQueue, TopicExchange exchange){
         return BindingBuilder.bind(orderQueue).to(exchange).with(orderBinding);
     }
 
