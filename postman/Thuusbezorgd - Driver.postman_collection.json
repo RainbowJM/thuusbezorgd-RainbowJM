@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "c49f3e91-cff6-4807-b69d-81e11fdc02c3",
+		"name": "Thuusbezorgd - Driver",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11394944"
+	},
+	"item": [
+		{
+			"name": "Get Deliveries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Delivery By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/deliveries/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"deliveries",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Delivery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderId\" : \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Delivery",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/deliveries/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"deliveries",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Delivery Status",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/deliveries/3/status/delivered",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"deliveries",
+						"3",
+						"status",
+						"delivered"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
