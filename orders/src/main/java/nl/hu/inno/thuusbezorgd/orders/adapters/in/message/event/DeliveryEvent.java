@@ -14,6 +14,7 @@ import java.util.Random;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DeliveryCreatedEvent.class),
         @JsonSubTypes.Type(value = DeliveryUpdatedEvent.class),
+        @JsonSubTypes.Type(value = DeliveryDeletedEvent.class),
 })
 public abstract class DeliveryEvent {
     @Getter

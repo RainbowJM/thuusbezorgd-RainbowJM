@@ -28,6 +28,12 @@ public class RabbitMqListener {
             case IngredientDecreasedEvent.KEY:
                 this.decrease((IngredientDecreasedEvent) event);
                 break;
+            case IngredientDeletedEvent.KEY:
+                this.delete((IngredientDeletedEvent) event);
+                break;
+            case IngredientAddedEvent.KEY:
+                this.add((IngredientAddedEvent) event);
+                break;
         }
     }
 
@@ -39,6 +45,13 @@ public class RabbitMqListener {
     private void decrease(IngredientDecreasedEvent event){
         logger.info("Stock has decreased due to orders that has been placed");
         // for in this future feature this could be handy
+    }
+    private void add(IngredientAddedEvent event) {
+        logger.info("New ingredient added, menu can be updated now");
+    }
+
+    private void delete(IngredientDeletedEvent event) {
+        logger.info("Ingredient was removed, can not order it anymore");
     }
     @RabbitListener(queues = {"${message.queue.driver-event}"})
     private void listen(DeliveryEvent event) {
@@ -53,12 +66,17 @@ public class RabbitMqListener {
     }
 
     private void create(DeliveryCreatedEvent event){
-        this.orderCommandService.create(new CreateOrderCommand(event.getUsername(),
-                event.getOrderedDishes(),
-                event.getAddress()));
+        logger.info("Order has a delivery order");
+//        this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
+
+
+//        this.orderCommandService.create(new CreateOrderCommand(event.getUsername(),
+//                event.getOrderedDishes(),
+//                event.getAddress()));
     }
 
     private void update(DeliveryUpdatedEvent event){
-        this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
+        logger.info("Order has been delivered");
+//        this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
     }
 }

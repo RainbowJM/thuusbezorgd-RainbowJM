@@ -14,6 +14,8 @@ import java.util.Random;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = IngredientDecreasedEvent.class),
         @JsonSubTypes.Type(value = IngredientIncreasedEvent.class),
+        @JsonSubTypes.Type(value = IngredientDeletedEvent.class),
+        @JsonSubTypes.Type(value = IngredientAddedEvent.class),
 })
 public abstract class StockEvent {
     @Getter
