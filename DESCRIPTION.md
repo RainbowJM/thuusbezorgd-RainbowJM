@@ -13,11 +13,19 @@ Each microservice has its own command and query.
 
 RabbitMQ was used as message broker. it's responsible for the sending and receiving messages.
 
-Each service runs on a different server port. 
+> Each service runs on a different server port. 
 
 The database that was used is PostgreSQL.
 
 > For this application there was some modification made to the general configuration of docker.
+
+Furthermore there is a postman collection for each microservice that can be used to test the application.
+
+[link] (./Thuusbezorgd - Driver.postman_collection.json)
+
+[link] (./Thuusbezorgd - Order.postman_collection.json)
+
+[link] (./Thuusbezorgd - Stock.postman_collection.json)
 
 ### Driver Service
 
