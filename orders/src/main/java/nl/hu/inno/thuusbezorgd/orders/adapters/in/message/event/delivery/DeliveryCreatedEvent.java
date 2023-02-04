@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event;
+package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.delivery;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AllArgsConstructor;

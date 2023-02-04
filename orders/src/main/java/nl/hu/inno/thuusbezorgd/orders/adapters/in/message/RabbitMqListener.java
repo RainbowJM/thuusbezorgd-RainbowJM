@@ -1,9 +1,10 @@
 package nl.hu.inno.thuusbezorgd.orders.adapters.in.message;
 
-import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.*;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.delivery.DeliveryCreatedEvent;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.delivery.DeliveryEvent;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.delivery.DeliveryUpdatedEvent;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.ingredient.*;
 import nl.hu.inno.thuusbezorgd.orders.core.application.OrderCommandService;
-import nl.hu.inno.thuusbezorgd.orders.core.application.command.CreateOrderCommand;
-import nl.hu.inno.thuusbezorgd.orders.core.application.command.UpdateOrderCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -55,18 +56,20 @@ public class RabbitMqListener {
     }
     @RabbitListener(queues = {"${message.queue.driver-event}"})
     private void listen(DeliveryEvent event) {
+        logger.info(event.getEventKey());
         switch (event.getEventKey()) {
             case DeliveryCreatedEvent.KEY:
                 this.create((DeliveryCreatedEvent) event);
                 break;
-            case DeliveryUpdatedEvent.KEY:
-                this.update((DeliveryUpdatedEvent) event);
-                break;
+//            case DeliveryUpdatedEvent.KEY:
+//                this.update((DeliveryUpdatedEvent) event);
+//                break;
         }
     }
 
     private void create(DeliveryCreatedEvent event){
         logger.info("Order has a delivery order");
+        logger.info(event);
 //        this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
 
 

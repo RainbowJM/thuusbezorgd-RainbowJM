@@ -1,8 +1,12 @@
-package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event;
+package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.ingredient;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.ingredient.IngredientAddedEvent;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.ingredient.IngredientDecreasedEvent;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.ingredient.IngredientDeletedEvent;
+import nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.ingredient.IngredientIncreasedEvent;
 
 import java.time.Instant;
 import java.util.Random;

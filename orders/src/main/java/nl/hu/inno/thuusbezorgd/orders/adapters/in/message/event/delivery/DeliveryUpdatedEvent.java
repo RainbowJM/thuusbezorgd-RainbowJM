@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event;
+package nl.hu.inno.thuusbezorgd.orders.adapters.in.message.event.delivery;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,4 @@ public class DeliveryUpdatedEvent extends DeliveryEvent {
         return KEY;
     }
 
-    @Getter
-    private final Long orderId;
 }

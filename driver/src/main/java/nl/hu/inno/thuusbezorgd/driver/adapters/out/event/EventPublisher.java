@@ -3,6 +3,8 @@ package nl.hu.inno.thuusbezorgd.driver.adapters.out.event;
 import lombok.AllArgsConstructor;
 import nl.hu.inno.thuusbezorgd.driver.core.event.DeliveryEvent;
 import nl.hu.inno.thuusbezorgd.driver.core.port.storage.DeliveryEventPublisher;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @AllArgsConstructor
