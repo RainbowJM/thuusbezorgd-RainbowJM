@@ -10,6 +10,12 @@ public class DeliveryUpdatedEvent extends DeliveryEvent {
 
     public static final String KEY = "driver.event.updated";
 
+    @Getter
+    private final Long orderId;
+
+    @Getter
+    private final Long deliveryId;
+
     @Override
     public String getEventKey() {
         return KEY;

@@ -60,8 +60,10 @@ public class DeliveryCommandService {
         Delivery delivery = deliveryOpt.get();
         delivery.markCompleted();
 
-        this.eventPublisher.publish(new DeliveryUpdatedEvent(delivery.getId()));
-        return this.deliveryRepository.save(delivery);
+        this.deliveryRepository.save(delivery);
+        this.eventPublisher.publish(new DeliveryUpdatedEvent(delivery.getId(),delivery.getOrderId()));
+
+        return delivery;
     }
 
 //    public Delivery change(ChangeDeliveryCommand changeDeliveryCommand) {

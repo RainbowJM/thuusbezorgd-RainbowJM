@@ -27,5 +27,8 @@ public class OrderCreatedEvent extends OrderEvent {
     private final String deliveryId;
 
     @Getter
+    private final Long orderId;
+
+    @Getter
     private final OrderStatus status;
 }

@@ -39,12 +39,14 @@ public class OrderCommandService {
                 orderCommand.orderedDishes());
         order.setStatus(OrderStatus.InPreparation);
 
+        this.orderRepository.save(order);
+
         this.eventPublisher.publish(new OrderCreatedEvent(order.getId(),
                 order.getDeliveryId(),
                 order.getStatus(),
                 order.getAddress()));
 
-        return this.orderRepository.save(order);
+        return order;
     }
 
     public void delete(DeleteOrderCommand deleteOrderCommand) {
@@ -64,12 +66,17 @@ public class OrderCommandService {
     public void update(UpdateOrderCommand updateOrderCommand) {
         Optional<Order> orderOpt = this.orderRepository.findById(updateOrderCommand.orderId());
 
-        if (orderOpt.isEmpty()) {
+        Order order = orderOpt.get();
+
+        if (order.getId() == null ) {
             throw new OrderNotFound(updateOrderCommand.orderId());
         }
 
-        Order order = orderOpt.get();
-        order.setStatus(OrderStatus.ReadyForDelivery);
+        if (order.getStatus() == OrderStatus.InPreparation) {
+            order.setStatus(OrderStatus.ReadyForDelivery);
+        } else if (order.getStatus() == OrderStatus.ReadyForDelivery) {
+            order.setStatus(OrderStatus.Delivered);
+        }
 
         this.orderRepository.save(order);
     }

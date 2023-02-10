@@ -13,4 +13,8 @@ public class DeliveryUpdatedEvent extends DeliveryEvent {
 
     @Getter
     private final Long deliveryId;
+
+    @Getter
+    private final Long orderId;
+
 }

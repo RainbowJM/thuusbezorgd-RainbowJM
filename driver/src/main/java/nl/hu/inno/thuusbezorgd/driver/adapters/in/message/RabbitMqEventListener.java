@@ -32,7 +32,7 @@ public class RabbitMqEventListener {
     }
 
     private void create(OrderCreatedEvent event) {
-        this.deliveryCommandService.create(new CreateDeliveryCommand(event.getId()));
+        this.deliveryCommandService.create(new CreateDeliveryCommand(event.getOrderId()));
     }
 
     private void delete(OrderRemovedEvent event) {

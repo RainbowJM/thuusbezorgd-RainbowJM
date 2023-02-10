@@ -49,6 +49,7 @@ public class RabbitMqListener {
         logger.info("Stock has decreased due to orders that has been placed");
         // for in this future feature this could be handy
     }
+
     private void add(IngredientAddedEvent event) {
         logger.info("New ingredient added, menu can be updated now");
     }
@@ -71,10 +72,11 @@ public class RabbitMqListener {
 
     private void create(DeliveryCreatedEvent event){
         logger.info("Order has a delivery order");
+        this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
     }
 
     private void update(DeliveryUpdatedEvent event){
         logger.info("Order has been delivered");
-        this.orderCommandService.update(new UpdateOrderCommand(event.getId()));
+        this.orderCommandService.update(new UpdateOrderCommand(event.getOrderId()));
     }
 }

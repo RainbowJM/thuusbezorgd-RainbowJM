@@ -48,10 +48,10 @@ public class DeliveryController {
         return this.commandService.create(new CreateDeliveryCommand(Long.valueOf(createDeliveryRequest.getOrderId())));
     }
 
-    @PutMapping("/{deliveryId}/status/{orderStatus}")
+    @PutMapping("/{deliveryId}/status")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Delivery update(@PathVariable Long deliveryId, @PathVariable String orderStatus) {
-        return this.commandService.update(new UpdateDeliveryStatus(deliveryId, orderStatus));
+    public Delivery update(@PathVariable Long deliveryId) {
+        return this.commandService.update(new UpdateDeliveryStatus(deliveryId));
     }
 
     @DeleteMapping("/{deliveryId}")
